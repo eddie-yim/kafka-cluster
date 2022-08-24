@@ -118,5 +118,5 @@ chmod 755 /etc/systemd/system/zookeeper-server.service
 fi
 
 echo "### Relaod zookeeper systemd ###"
-systemctl daemon-reload
-#systemctl start zookeeper-server
+sudo systemctl daemon-reload
+sudo systemctl restart zookeeper-server
