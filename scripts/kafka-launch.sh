@@ -24,7 +24,7 @@ fi
 echo ">> JAVA_HOME=$JAVA_HOME"
 
 echo "### INSTALL KAFKA ###"
-if ! -e /usr/local/kafka_2.13-3.2.1/bin
+if [ ! -e /usr/local/kafka_2.13-3.2.1/bin ]
 then
     echo ">> Installing kafka ..."
     sudo wget -P /opt https://archive.apache.org/dist/kafka/3.2.1/kafka_2.13-3.2.1.tgz
