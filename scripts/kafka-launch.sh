@@ -34,7 +34,7 @@ then
 fi
 
 echo "### SET KAFKA CONFIG INTO server.properties ###"
-if ! -e /var/lib/kafka/data
+if [ ! -e /var/lib/kafka/data ]
 then
     sudo make -P /var/lib/kafka/data
 fi
