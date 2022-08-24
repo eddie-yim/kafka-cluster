@@ -118,9 +118,9 @@ ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/ser
 ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/zookeeper-server.service
-sudo chmod 755 /etc/systemd/system/zookeeper-server.service
+WantedBy=multi-user.target" > /etc/systemd/system/kafka-server.service
+sudo chmod 755 /etc/systemd/system/kafka-server.service
 
 echo -e "\n### RELOAD KAFKA SYSTEMD ###"
 #systemctl daemon-reload
-#sudo systemctl start zookeeper-server
+#sudo systemctl start kafka-server
