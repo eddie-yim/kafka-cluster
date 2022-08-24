@@ -75,6 +75,29 @@ zookeeper.set.acl=true" > /usr/local/kafka/config/server.properties
 
 sudo chmod 644 /usr/local/kafka/config/server.properties
 
+echo -e "### BROKER SASL/SCRAM CONFIG ###"
+if [ ! -e /usr/local/kafka/config/kafka_server_jaas.conf ]
+    sudo touch /usr/local/kafka/config/kafka_server_jaas.conf
+then
+fi
+
+sudo echo -e "KafkaServer {
+    org.apache.kafka.common.security.scram.ScramLoginModule required
+    username=\"broker\"
+    password=\"${SCRAM_BROKER_PASSWORD}\"
+    user_client=\"${SCRAM_CLIENT_PASSWORD}\";
+};
+Client {
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+    username=\"admin\"
+    password=\"${SCRAM_ADMIN_PASSWORD}\";
+};
+KafkaClient {
+    org.apache.kafka.common.security.scram.ScramLoginModule required
+    username=\"client\"
+    password=\"${SCRAM_CLIENT_PASSWORD}\";
+};" > /usr/local/kafka/config/kafka_server_jaas.conf
+
 echo -e "\n### REGISTER KAFKA SERVICE IN SYSTEMD ###"
 if [ ! -e /etc/systemd/system/kafka-server.service ]
 then
