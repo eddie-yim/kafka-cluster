@@ -81,6 +81,43 @@ fi
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
 sudo chmod -R 755 /var/lib/zookeeper
 
+echo -e "\n### SASL/SCRAM ###"
+if [ ! -e /usr/local/zookeeper/conf/zookeeper_server_jaas.conf ]
+then
+    sudo touch /usr/local/zookeeper/conf/zookeeper_server_jaas.conf
+fi
+echo -e "Server {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+  user_admin=\"${DLM_ADMIN_PASSWORD}\";
+};
+QuorumServer {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+  user_zookeeper=\"${DLM_ZOOKEEPER_PASSWORD}\";
+};
+QuorumLearner {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+  username=\"zookeeper\"
+  password=\"${DLM_ZOOKEEPER_PASSWORD}\";
+};" > /usr/local/zookeeper/conf/zookeeper_server_jaas.conf
+sudo chown zookeeper:zookeeper /usr/local/zookeeper/conf/zookeeper_server_jaas.conf
+
+if [ ! -e /usr/local/zookeeper/conf/zookeeper-env.sh ]
+then
+    sudo touch /usr/local/zookeeper/conf/zookeeper-env.sh
+fi
+sudo echo -e "JVMFLAGS=\"-Djava.security.auth.login.config=/usr/local/zookeeper/conf/zookeeper_server_jaas.conf \
+-Dquorum.auth.enableSasl=true \
+-Dquorum.auth.learnerRequireSasl=true \
+-Dquorum.auth.serverRequireSasl=true \
+-Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider \
+-Dzookeeper.authProvider.2=org.apache.zookeeper.server.auth.DigestAuthenticationProvider \
+-DjaasLoginRenew=3600000 \
+-DrequireClientAuthScheme=sasl \
+-Dquorum.auth.learner.loginContext=QuorumLearner \
+-Dquorum.auth.server.loginContext=QuorumServer\"
+
+ZK_SERVER_HEAP=\"512\"" > /usr/local/zookeeper/conf/zookeeper-env.sh
+
 echo -e "\n### REGISTER ZOOKEEPER FOR SYSTEMD ###"
 if [ ! -e /etc/systemd/system/zookeeper-server.service ]
 then
