@@ -116,6 +116,6 @@ WantedBy=multi-user.target" > /etc/systemd/system/zookeeper-server.service
 chmod 755 /etc/systemd/system/zookeeper-server.service
 fi
 
-echo "### Relaod zookeeper systemd ###"
+#echo "### Relaod zookeeper systemd ###"
 #sudo systemctl daemon-reload
-#sudo systemctl restart zookeeper-server
+#sudo systemctl start zookeeper-server
