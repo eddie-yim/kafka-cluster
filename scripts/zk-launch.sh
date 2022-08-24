@@ -1,19 +1,18 @@
 #!/bin/bash
-echo "### Install Utilities ###"
+echo "### INSTALL UTILITIES ###"
 sudo yum update -y
 sudo yum install -y wget which git vim
 
-echo "### Install corretto Java 11 ###"
+echo "### INSTALL CORRETTO JAVA 11 ###"
 if ! which java | grep -q 'java'
 then
     echo "> Installing Java ..."
     sudo rpm --import https://yum.corretto.aws/corretto.key
-    sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
-    sudo yum install -y java-11-amazon-corretto-devel
+    sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corrkkkkyum install -y java-11-amazon-corretto-devel
 fi
 echo ">> $(which java)"
 
-echo "### Set JAVA_HOME environment ###"
+echo "### SET JAVA_HOME ENVIRONMENT ###"
 if [ -z "$JAVA_HOME" ]
 then
     echo "> Setting JAVA_HOME ..."
@@ -23,7 +22,7 @@ then
 fi
 echo ">> JAVA_HOME=$JAVA_HOME"
 
-echo "### Add group named zookeeper ###"
+echo "### ADD GROUP NAMED ZOOKEEPER ###"
 if ! grep -q '^zookeeper:' /etc/group
 then
     echo "> Adding group zookeeper ..."
@@ -31,7 +30,7 @@ then
 fi
 echo ">> $(grep zookeeper /etc/group)"
 
-echo "### Add user named zookeeper ###"
+echo "### ADD USER NAMED ZOOKEEPER ###"
 if ! grep -q '^zookeeper:' /etc/passwd
 then
     echo "> Adding user zookeeper ..."
@@ -75,7 +74,7 @@ if [ ! -e /var/lib/zookeeper/data/myid ]
 then
     echo "> Creating zookeeper myid ..."
     sudo touch /var/lib/zookeeper/data/myid
-    echo "${ZK_ID}" > /var/lib/zookeeper/data/myid
+    sudo echo "${ZK_ID}" > /var/lib/zookeeper/data/myid
 fi
 
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
@@ -85,7 +84,7 @@ echo "### REGISTER ZOOKEEPER FOR SYSTEMD ###"
 if [ ! -e /etc/systemd/system/zookeeper-server.service ]
 then
 sudo touch /etc/systemd/system/zookeeper-server.service
-echo "[Unit]
+sudo echo "[Unit]
 Description=zookeeper-server
 After=network.target
 
@@ -103,9 +102,10 @@ ExecReload=/usr/local/zookeeper/bin/zkServer.sh restart
 
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/zookeeper-server.service
-chmod 755 /etc/systemd/system/zookeeper-server.service
 fi
 
-echo "### Relaod zookeeper systemd ###"
+sudo chmod 755 /etc/systemd/system/zookeeper-server.service
+
+echo "### RELOAD ZOOKEEPER SYSTEMD ###"
 sudo systemctl daemon-reload
 sudo systemctl start zookeeper-server
