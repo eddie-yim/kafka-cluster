@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "\n### INSTALL UTILITIES ###"
+echo -e "\n### INSTALL UTILITIES ###"
 sudo yum update -y
 sudo yum install -y wget which git vim
 
-echo "\n### INSTALL CORRETTO JAVA 11 ###"
+echo -e "\n### INSTALL CORRETTO JAVA 11 ###"
 if ! which java | grep -q 'java'
 then
     echo "> Installing Java ..."
@@ -13,7 +13,7 @@ then
 fi
 echo ">> $(which java)"
 
-echo "\n### SET JAVA_HOME ENVIRONMENT ###"
+echo -e "\n### SET JAVA_HOME ENVIRONMENT ###"
 if [ -z "$JAVA_HOME" ]
 then
     echo "> Setting JAVA_HOME ..."
@@ -23,7 +23,7 @@ then
 fi
 echo ">> JAVA_HOME=$JAVA_HOME"
 
-echo "\n### ADD GROUP NAMED ZOOKEEPER ###"
+echo -e "\n### ADD GROUP NAMED ZOOKEEPER ###"
 if ! grep -q '^zookeeper:' /etc/group
 then
     echo "> Adding group zookeeper ..."
@@ -31,7 +31,7 @@ then
 fi
 echo ">> $(grep zookeeper /etc/group)"
 
-echo "\n### ADD USER NAMED ZOOKEEPER ###"
+echo -e "\n### ADD USER NAMED ZOOKEEPER ###"
 if ! grep -q '^zookeeper:' /etc/passwd
 then
     echo "> Adding user zookeeper ..."
@@ -42,7 +42,7 @@ echo ">> $(grep zookeeper /etc/passwd)"
 sudo mkdir -p /var/lib/zookeeper/data
 sudo mkdir -p /var/lib/zookeeper/logs
 
-echo "\n### INSTALL ZOOKEEPER ###"
+echo -e "\n### INSTALL ZOOKEEPER ###"
 if [ ! -e /usr/local/zookeeper ]
 then
     echo ">> Installing zookeeper ..."
@@ -70,7 +70,7 @@ fi
 sudo chown zookeeper:zookeeper /usr/local/zookeeper/conf/zoo.cfg
 sudo chmod 644 /usr/local/zookeeper/conf/zoo.cfg
 
-echo "\n### SET ZOOKEEPER myid ###"
+echo -e "\n### SET ZOOKEEPER myid ###"
 if [ ! -e /var/lib/zookeeper/data/myid ]
 then
     echo "> Creating zookeeper myid ..."
@@ -81,7 +81,7 @@ fi
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
 sudo chmod -R 755 /var/lib/zookeeper
 
-echo "\n### REGISTER ZOOKEEPER FOR SYSTEMD ###"
+echo -e "\n### REGISTER ZOOKEEPER FOR SYSTEMD ###"
 if [ ! -e /etc/systemd/system/zookeeper-server.service ]
 then
 sudo touch /etc/systemd/system/zookeeper-server.service
@@ -107,6 +107,6 @@ fi
 
 sudo chmod 755 /etc/systemd/system/zookeeper-server.service
 
-echo "\n### RELOAD ZOOKEEPER SYSTEMD ###"
+echo -e "\n### RELOAD ZOOKEEPER SYSTEMD ###"
 sudo systemctl daemon-reload
 sudo systemctl start zookeeper-server
