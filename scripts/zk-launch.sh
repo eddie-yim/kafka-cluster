@@ -54,11 +54,11 @@ echo "### INSTALL ZOOKEEPER ###"
 if [ ! -e /usr/local/zookeeper ]
 then
     echo ">> Installing zookeeper ..."
-    sudo wget -P /opt https://archive.apache.org/dist/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-    sudo chmod 600 /opt/apache-zookeeper-3.8.0-bin.tar.gz
-    sudo tar -zxvf /opt/apache-zookeeper-3.8.0-bin.tar.gz -C /usr/local
-    sudo chown -R zookeeper:zookeeper /usr/local/apache-zookeeper-3.8.0-bin
-    sudo ln -s /usr/local/apache-zookeeper-3.8.0-bin /usr/local/zookeeper
+    sudo wget -P /opt https://archive.apache.org/dist/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1-bin.tar.gz
+    sudo chmod 600 /opt/apache-zookeeper-3.7.1-bin.tar.gz
+    sudo tar -zxvf /opt/apache-zookeeper-3.7.1-bin.tar.gz -C /usr/local
+    sudo chown -R zookeeper:zookeeper /usr/local/apache-zookeeper-3.7.1-bin
+    sudo ln -s /usr/local/apache-zookeeper-3.7.1-bin /usr/local/zookeeper
     sudo chown -R zookeeper:zookeeper /usr/local/zookeeper
 else
     echo ">> zookeeper already installed."
