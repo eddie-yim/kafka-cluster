@@ -77,8 +77,8 @@ sudo chmod 644 /usr/local/kafka/config/server.properties
 
 echo -e "### BROKER SASL/SCRAM CONFIG ###"
 if [ ! -e /usr/local/kafka/config/kafka_server_jaas.conf ]
-    sudo touch /usr/local/kafka/config/kafka_server_jaas.conf
 then
+    sudo touch /usr/local/kafka/config/kafka_server_jaas.conf
 fi
 
 sudo echo -e "KafkaServer {
