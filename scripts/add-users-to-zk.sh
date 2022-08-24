@@ -16,8 +16,8 @@ then
 fi
 
 echo -e "\n### REGISTER KAFKA ENITY USERS ###"
-/usr/local/kafka/bin/kafka-configs --zookeeper localhost:2181 --alter --add-config "SCRAM-SHA-512=[password=${SCRAM_CLIENT_PASSWORD}]" --entity-type users --entity-name client
-/usr/local/kafka/bin/kafka-configs --zookeeper localhost:2181 --alter --add-config "SCRAM-SHA-512=[password=${SCRAM_BROKER_PASSWORD}]" --entity-type users --entity-name broker
+sh /usr/local/kafka/bin/kafka-configs.sh --zookeeper localhost:2181 --alter --add-config "SCRAM-SHA-512=[password=${SCRAM_CLIENT_PASSWORD}]" --entity-type users --entity-name client
+sh /usr/local/kafka/bin/kafka-configs.sh --zookeeper localhost:2181 --alter --add-config "SCRAM-SHA-512=[password=${SCRAM_BROKER_PASSWORD}]" --entity-type users --entity-name broker
 
 echo -e "\n### RELOAD ZOOKEEPER SYSTEMD ###"
 sudo systemctl daemon-reload
