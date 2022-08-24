@@ -36,7 +36,7 @@ fi
 echo ">> $(grep zookeeper /etc/group)"
 
 echo "### Add user named zookeeper ###"
-if ! grep -q '^zookeeper:' /etc/passwod
+if ! grep -q '^zookeeper:' /etc/passwd
 then
     echo "> Adding user zookeeper ..."
     sudo useradd -g zookeeper zookeeper
