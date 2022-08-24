@@ -1,7 +1,6 @@
 # kafka-cluster
 ## Required Environments in ZooKeeper
 ```
-//for only single zookeeper
 ZK_HOSTS
 DLM_ADMIN_PASSWORD
 DLM_ZOOKEEPER_PASSWORD
