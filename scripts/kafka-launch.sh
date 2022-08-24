@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "### INSTALL UTILITIES ###"
+echo "\n### INSTALL UTILITIES ###"
 sudo yum update -y
 sudo yum install -y wget which git vim
 
-echo "### INSTALL CORRETTO JAVA 11 ###"
+echo "\n### INSTALL CORRETTO JAVA 11 ###"
 if ! which java | grep -q 'java'
 then
     echo "> Installing Java ..."
@@ -13,7 +13,7 @@ then
 fi
 echo ">> $(which java)"
 
-echo "### SET JAVA_HOME ENVIRONMENT ###"
+echo "\n### SET JAVA_HOME ENVIRONMENT ###"
 if [ -z "$JAVA_HOME" ]
 then
     echo "> Setting JAVA_HOME ..."
@@ -23,7 +23,7 @@ then
 fi
 echo ">> JAVA_HOME=$JAVA_HOME"
 
-echo "### INSTALL KAFKA ###"
+echo "\n### INSTALL KAFKA ###"
 if [ ! -e /usr/local/kafka_2.13-3.2.1/bin ]
 then
     echo ">> Installing kafka ..."
@@ -33,7 +33,7 @@ then
     sudo ln -s /usr/local/kafka_2.13-3.2.1 /usr/local/kafka
 fi
 
-echo "### SET KAFKA CONFIG INTO server.properties ###"
+echo "\n### SET KAFKA CONFIG INTO server.properties ###"
 if [ ! -e /var/lib/kafka/data ]
 then
     sudo make -P /var/lib/kafka/data
@@ -75,7 +75,7 @@ zookeeper.set.acl=true" > /usr/local/kafka/config/server.properties
 
 sudo chmod 644 /usr/local/kafka/config/server.properties
 
-echo "### REGISTER KAFKA SERVICE IN SYSTEMD ###"
+echo "\n### REGISTER KAFKA SERVICE IN SYSTEMD ###"
 if [ ! -e /etc/systemd/system/kafka-server.service ]
 then
     sudo touch /etc/systemd/system/kafka-server.service
@@ -98,6 +98,6 @@ ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 WantedBy=multi-user.target" > /etc/systemd/system/zookeeper-server.service
 sudo chmod 755 /etc/systemd/system/zookeeper-server.service
 
-echo "### RELOAD KAFKA SYSTEMD ###"
+echo "\n### RELOAD KAFKA SYSTEMD ###"
 #systemctl daemon-reload
 #sudo systemctl start zookeeper-server
