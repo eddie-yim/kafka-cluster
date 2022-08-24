@@ -3,7 +3,7 @@ echo "### Install Utils ###"
 sudo yum update -y
 sudo yum install -y wget which git vim
 
-echo "### Install corretto Java 17 ###"
+echo "### Install corretto Java 11 ###"
 if ! which java | grep -q 'java'
 then
     echo "> Installing Java ..."
