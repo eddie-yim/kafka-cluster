@@ -81,7 +81,7 @@ if [ ! -e /var/lib/zookeeper/data/myid ]
 then
     echo "> Creating zookeeper myid ..."
     sudo touch /var/lib/zookeeper/data/myid
-    sudo echo "${ZK_ID}" > /var/lib/zookeeper/data/myid
+    sudo echo "${ZK_MYID}" > /var/lib/zookeeper/data/myid
 fi
 
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
