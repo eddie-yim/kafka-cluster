@@ -70,7 +70,7 @@ index=0
 for zk_host in "${SPLITTED_ZK_HOSTS[@]}"
 do
     index=$(expr $index + 1)
-    echo "server.$index=$zk_host:2888:3888" > /usr/local/zookeeper/conf/zoo.cfg
+    sudo echo "server.$index=$zk_host:2888:3888" > /usr/local/zookeeper/conf/zoo.cfg
 done
 
 sudo chown zookeeper:zookeeper /usr/local/zookeeper/conf/zoo.cfg
