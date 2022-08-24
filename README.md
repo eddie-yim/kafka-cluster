@@ -2,6 +2,7 @@
 ## Required Environments in ZooKeeper
 ```
 ZK_HOSTS
+ZK_MYID
 DLM_ADMIN_PASSWORD
 DLM_ZOOKEEPER_PASSWORD
 ```
