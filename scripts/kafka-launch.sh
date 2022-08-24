@@ -36,7 +36,7 @@ fi
 echo -e "\n### SET KAFKA CONFIG INTO server.properties ###"
 if [ ! -e /var/lib/kafka/data ]
 then
-    sudo make -P /var/lib/kafka/data
+    sudo mkdir -P /var/lib/kafka/data
 fi
 
 echo "broker.id=${BROKER_ID}
