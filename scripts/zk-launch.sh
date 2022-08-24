@@ -7,7 +7,7 @@ echo "### Install corretto Java 17 ###"
 if ! which java | grep -q 'java'
 then
     echo "> Installing Java ..."
-    sudo yum install -y https://corretto.aws/downloads/latest/amazon-corretto-17-aarch64-linux-jdk.rpm
+    sudo yum install -y yum install -y java-11-amazon-corretto-devel
 else
     echo "> Java already installed."
 fi
@@ -116,6 +116,6 @@ WantedBy=multi-user.target" > /etc/systemd/system/zookeeper-server.service
 chmod 755 /etc/systemd/system/zookeeper-server.service
 fi
 
-#echo "### Relaod zookeeper systemd ###"
-#sudo systemctl daemon-reload
-#sudo systemctl start zookeeper-server
+echo "### Relaod zookeeper systemd ###"
+sudo systemctl daemon-reload
+sudo systemctl start zookeeper-server
