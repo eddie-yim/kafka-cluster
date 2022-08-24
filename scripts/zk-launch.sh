@@ -63,9 +63,15 @@ syncLimit=5
 dataDir=/var/lib/zookeeper/data
 clientPort=2181
 autopurge.snapRetainCount=3
-autopurge.purgeInterval=1
-server.${ZK_ID}=${ZK_HOST}:2888:3888" > /usr/local/zookeeper/conf/zoo.cfg
+autopurge.purgeInterval=1" > /usr/local/zookeeper/conf/zoo.cfg
 fi 
+SPLITTED_ZK_HOSTS=(`echo "$ZK_HOSTS" | tr ',' ' '`)
+index=0
+for zk_host in "${SPLITTED_ZK_HOSTS[@]}"
+do
+    index=$(expr $index + 1)
+    echo "server.$index=$zk_host:2888:3888" > /usr/local/zookeeper/conf/zoo.cfg
+done
 
 sudo chown zookeeper:zookeeper /usr/local/zookeeper/conf/zoo.cfg
 sudo chmod 644 /usr/local/zookeeper/conf/zoo.cfg
