@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "### Install Utils ###"
+echo "### Install Utilities ###"
 sudo yum update -y
 sudo yum install -y wget which git vim
 
@@ -10,8 +10,6 @@ then
     sudo rpm --import https://yum.corretto.aws/corretto.key
     sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
     sudo yum install -y yum install -y java-11-amazon-corretto-devel
-else
-    echo "> Java already installed."
 fi
 echo ">> $(which java)"
 
@@ -22,8 +20,6 @@ then
     javalocation=$(readlink -f $(which java))
     sudo echo "export JAVA_HOME=${javalocation/\/bin\/java/}" >> /etc/profile
     sudo source /etc/profile
-else
-    echo "> JAVA_HOME exists."
 fi
 echo ">> JAVA_HOME=$JAVA_HOME"
 
@@ -32,8 +28,6 @@ if ! grep -q '^zookeeper:' /etc/group
 then
     echo "> Adding group zookeeper ..."
     sudo groupadd zookeeper
-else
-    echo "> zookeeper group exists."
 fi
 echo ">> $(grep zookeeper /etc/group)"
 
@@ -42,8 +36,6 @@ if ! grep -q '^zookeeper:' /etc/passwd
 then
     echo "> Adding user zookeeper ..."
     sudo useradd -g zookeeper zookeeper
-else
-    echo "> zookeeper user exists."
 fi
 echo ">> $(grep zookeeper /etc/passwd)"
 
@@ -60,8 +52,6 @@ then
     sudo chown -R zookeeper:zookeeper /usr/local/apache-zookeeper-3.7.1-bin
     sudo ln -s /usr/local/apache-zookeeper-3.7.1-bin /usr/local/zookeeper
     sudo chown -R zookeeper:zookeeper /usr/local/zookeeper
-else
-    echo ">> zookeeper already installed."
 fi
 
 if [ ! -e /usr/local/zookeeper/conf/zoo.cfg ]
@@ -86,8 +76,6 @@ then
     echo "> Creating zookeeper myid ..."
     sudo touch /var/lib/zookeeper/data/myid
     echo "${ZK_ID}" > /var/lib/zookeeper/data/myid
-else
-    echo '> /var/lib/zookeeper/data/myid exists.'
 fi
 
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
