@@ -90,6 +90,14 @@ KafkaClient {
     password=\"${SCRAM_CLIENT_PASSWORD}\";
 };" > /usr/local/kafka/config/kafka_server_jaas.conf
 
+# kafka options
+if [ -z "$KAFKA_OPTS" ]; then
+sudo echo "KAFKA_OPTS=\"-Dzookeeper.sasl.client=true \
+-Dzookeeper.sasl.clientconfig=Client \
+-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf\"" >> /etc/profile
+source /etc/profile
+fi
+
 # register kafka service in systemd
 sudo echo "[Unit]
 Description=kafka-server
