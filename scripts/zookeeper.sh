@@ -13,7 +13,7 @@ fi
 if [ -z "$JAVA_HOME" ]; then
     javalocation=$(readlink -f $(which java))
     sudo echo "export JAVA_HOME=${javalocation/\/bin\/java/}" >> /etc/profile
-    sudo source /etc/profile
+    source /etc/profile
 fi
 
 if [ -z "JAVA_HOME" ]; then
