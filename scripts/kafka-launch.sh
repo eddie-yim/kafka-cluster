@@ -1,42 +1,36 @@
 #!/bin/bash
-echo -e "\n### INSTALL UTILITIES ###"
+# install utilities
 sudo yum update -y
 sudo yum install -y wget which git vim
 
-echo -e "\n### INSTALL CORRETTO JAVA 11 ###"
-if ! which java | grep -q 'java'
-then
-    echo "> Installing Java ..."
+# install java 11
+if ! which java | grep -q 'java'; then
     sudo rpm --import https://yum.corretto.aws/corretto.key
     sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
     sudo yum install -y java-11-amazon-corretto-devel
 fi
-echo ">> $(which java)"
 
-echo -e "\n### SET JAVA_HOME ENVIRONMENT ###"
-if [ -z "$JAVA_HOME" ]
-then
-    echo "> Setting JAVA_HOME ..."
+if [ -z "$JAVA_HOME" ]; then
     javalocation=$(readlink -f $(which java))
     sudo echo "export JAVA_HOME=${javalocation/\/bin\/java/}" >> /etc/profile
     sudo source /etc/profile
 fi
-echo ">> JAVA_HOME=$JAVA_HOME"
 
-echo -e "\n### INSTALL KAFKA ###"
-if [ ! -e /usr/local/kafka_2.13-3.2.1/bin ]
-then
-    echo ">> Installing kafka ..."
+if [ -z "JAVA_HOME" ]; then
+    echo "Faile to set JAVA_HOME environment variable."
+    exit 1
+fi
+
+# install kafka
+if [ ! -e /usr/local/kafka_2.13-3.2.1/bin ]; then
     sudo wget -P /opt https://archive.apache.org/dist/kafka/3.2.1/kafka_2.13-3.2.1.tgz
     sudo chmod 600 /opt/kafka_2.13-3.2.1.tgz
     sudo tar zxvf /opt/kafka_2.13-3.2.1.tgz -C /usr/local
     sudo ln -s /usr/local/kafka_2.13-3.2.1 /usr/local/kafka
 fi
 
-echo -e "\n### SET KAFKA CONFIG INTO server.properties ###"
-if [ ! -e /var/lib/kafka/data ]
-then
-    sudo mkdir -p /var/lib/kafka/data
+if [ ! -e /data/kafka ]; then
+    sudo mkdir -p /data/kafka
 fi
 
 echo "broker.id=${BROKER_ID}
@@ -45,7 +39,7 @@ allow.everyone.if.no.acl.found=true
 authorizer.class.name=kafka.security.auth.SimpleAclAuthorizer
 auto.create.topics.enable=true
 listeners=SASL_PLAINTEXT://0.0.0.0:9092
-log.dirs=/var/lib/kafka/data
+log.dirs=/data/kafka
 min.insync.replicas=1
 num.io.threads=8
 num.network.threads=3
@@ -75,12 +69,7 @@ zookeeper.set.acl=true" > /usr/local/kafka/config/server.properties
 
 sudo chmod 644 /usr/local/kafka/config/server.properties
 
-echo -e "### BROKER SASL/SCRAM CONFIG ###"
-if [ ! -e /usr/local/kafka/config/kafka_server_jaas.conf ]
-then
-    sudo touch /usr/local/kafka/config/kafka_server_jaas.conf
-fi
-
+# broker sasl/scram config
 sudo echo -e "KafkaServer {
     org.apache.kafka.common.security.scram.ScramLoginModule required
     username=\"broker\"
@@ -98,12 +87,7 @@ KafkaClient {
     password=\"${SCRAM_CLIENT_PASSWORD}\";
 };" > /usr/local/kafka/config/kafka_server_jaas.conf
 
-echo -e "\n### REGISTER KAFKA SERVICE IN SYSTEMD ###"
-if [ ! -e /etc/systemd/system/kafka-server.service ]
-then
-    sudo touch /etc/systemd/system/kafka-server.service
-fi
-
+# register kafka service in systemd
 sudo echo "[Unit]
 Description=kafka-server
 After=network.target
@@ -119,8 +103,10 @@ ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/kafka-server.service
+
 sudo chmod 755 /etc/systemd/system/kafka-server.service
 
-echo -e "\n### RELOAD KAFKA SYSTEMD ###"
+# reload kafka systemd
 #systemctl daemon-reload
+
 #sudo systemctl start kafka-server
