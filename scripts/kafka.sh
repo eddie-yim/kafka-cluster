@@ -59,12 +59,11 @@ transaction.state.log.min.isr=1
 log.retention.hours=168
 log.segment.bytes=1073741824
 log.retention.check.interval.ms=300000
-zookeeper.connect=localhost:2181
-zookeeper.connection.timeout.ms=6000
 confluent.support.metrics.enable=true
 confluent.support.customer.id=anonymous
 group.initial.rebalance.delay.ms=0
-zookeeper.connect=localhost:2181
+zookeeper.connect=${ZOOKEEPER_CONNECT}
+zookeeper.connection.timeout.ms=6000
 zookeeper.set.acl=true" > /usr/local/kafka/config/server.properties
 
 sudo chmod 644 /usr/local/kafka/config/server.properties
