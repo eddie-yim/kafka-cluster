@@ -16,8 +16,8 @@ if [ -z "$JAVA_HOME" ]; then
     source /etc/profile
 fi
 
-if [ -z "JAVA_HOME" ]; then
-    echo "Faile to set JAVA_HOME environment variable."
+if [ -z "$JAVA_HOME" ]; then
+    echo "Failed to set JAVA_HOME environment variable."
     exit 1
 fi
 
