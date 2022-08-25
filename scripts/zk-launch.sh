@@ -39,8 +39,7 @@ then
 fi
 echo ">> $(grep zookeeper /etc/passwd)"
 
-sudo mkdir -p /var/lib/zookeeper/data
-sudo mkdir -p /var/lib/zookeeper/logs
+sudo mkdir -p /data/zookeeper
 
 echo -e "\n### INSTALL ZOOKEEPER ###"
 if [ ! -e /usr/local/zookeeper ]
@@ -60,7 +59,7 @@ echo '>> Setting zookeeper server configuation ...'
 sudo echo "tickTime=2000
 initLimit=10
 syncLimit=5
-dataDir=/var/lib/zookeeper/data
+dataDir=/data/zookeeper
 clientPort=2181
 autopurge.snapRetainCount=3
 autopurge.purgeInterval=1" > /usr/local/zookeeper/conf/zoo.cfg
@@ -77,11 +76,11 @@ sudo chown zookeeper:zookeeper /usr/local/zookeeper/conf/zoo.cfg
 sudo chmod 644 /usr/local/zookeeper/conf/zoo.cfg
 
 echo -e "\n### SET ZOOKEEPER myid ###"
-if [ ! -e /var/lib/zookeeper/data/myid ]
+if [ ! -e /data/zookeeper/myid ]
 then
     echo "> Creating zookeeper myid ..."
-    sudo touch /var/lib/zookeeper/data/myid
-    sudo echo "${ZK_MYID}" > /var/lib/zookeeper/data/myid
+    sudo touch /data/zookeeper/myid
+    sudo echo "${ZK_MYID}" > /data/zookeeper/myid
 fi
 
 sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
