@@ -70,9 +70,9 @@ if [ ! -e /data/zookeeper/myid ]; then
     sudo echo "${ZK_MYID}" > /data/zookeeper/myid
 fi
 
-sudo chown -R zookeeper:zookeeper /var/lib/zookeeper
+sudo chown -R zookeeper:zookeeper /data/zookeeper
 
-sudo chmod -R 755 /var/lib/zookeeper
+sudo chmod -R 755 /data/zookeeper
 
 # sasl/scram
 echo -e "Server {
