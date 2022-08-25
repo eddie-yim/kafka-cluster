@@ -33,13 +33,19 @@ if [ ! -e /data/kafka ]; then
     sudo mkdir -p /data/kafka
 fi
 
-echo "broker.id=${BROKER_ID}
+sudo echo -e "broker.id=${BROKER_ID}
 advertised.listeners=SASL_PLAINTEXT://localhost:9092
 allow.everyone.if.no.acl.found=true
 authorizer.class.name=kafka.security.auth.SimpleAclAuthorizer
 auto.create.topics.enable=true
+confluent.support.customer.id=anonymous
+confluent.support.metrics.enable=true
+group.initial.rebalance.delay.ms=0
 listeners=SASL_PLAINTEXT://0.0.0.0:9092
 log.dirs=/data/kafka
+log.retention.hours=168
+log.retention.check.interval.ms=300000
+log.segment.bytes=1073741824
 min.insync.replicas=1
 num.io.threads=8
 num.network.threads=3
@@ -56,17 +62,15 @@ socket.request.max.bytes=104857600
 super.users=User:broker;User:client;
 transaction.state.log.replication.factor=1
 transaction.state.log.min.isr=1
-log.retention.hours=168
-log.segment.bytes=1073741824
-log.retention.check.interval.ms=300000
-confluent.support.metrics.enable=true
-confluent.support.customer.id=anonymous
-group.initial.rebalance.delay.ms=0
 zookeeper.connect=${ZOOKEEPER_CONNECT}
 zookeeper.connection.timeout.ms=6000
 zookeeper.set.acl=true" > /usr/local/kafka/config/server.properties
 
 sudo chmod 644 /usr/local/kafka/config/server.properties
+
+sudo echo "JMX_PORT=9999" > /usr/local/kafka/config/jmx
+
+sudo chmod 644 /usr/local/kafka/config/jmx
 
 # broker sasl/scram config
 sudo echo -e "KafkaServer {
