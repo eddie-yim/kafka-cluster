@@ -4,7 +4,7 @@ sudo yum update -y
 sudo yum install -y wget which git vim
 
 # install java 11
-if ! which java | grep -q 'java'; then
+if ! which java | grep -q '/bin/java'; then
     sudo rpm --import https://yum.corretto.aws/corretto.key
     sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
     sudo yum install -y java-11-amazon-corretto-devel
