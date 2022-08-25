@@ -17,7 +17,7 @@ if [ -z "$JAVA_HOME" ]; then
 fi
 
 if [ -z "$JAVA_HOME" ]; then
-    echo "Faile to set JAVA_HOME environment variable."
+    echo "Failed to set JAVA_HOME environment variable."
     exit 1
 fi
 
