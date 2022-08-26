@@ -115,7 +115,7 @@ ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/kafka-server.service
 
-sudo chmod 0644 /etc/systemd/system/kafka-server.service
+sudo chmod 644 /etc/systemd/system/kafka-server.service
 
 # reload kafka systemd
 #systemctl daemon-reload
