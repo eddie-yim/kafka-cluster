@@ -13,7 +13,7 @@ fi
 if [ -z "$JAVA_HOME" ]; then
     javalocation=$(readlink -f $(which java))
     sudo echo "export JAVA_HOME=${javalocation/\/bin\/java/}" >> /etc/profile
-    source /etc/profile
+    sudo -s source /etc/profile
 fi
 
 if [ -z "$JAVA_HOME" ]; then
@@ -95,7 +95,7 @@ if [ -z "$KAFKA_OPTS" ]; then
 sudo echo "export KAFKA_OPTS=\"-Dzookeeper.sasl.client=true \
 -Dzookeeper.sasl.clientconfig=Client \
 -Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf\"" >> /etc/profile
-source /etc/profile
+sudo -s source /etc/profile
 fi
 
 # register kafka service in systemd
