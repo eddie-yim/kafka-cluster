@@ -8,4 +8,4 @@ export SCRAM_ADMIN_PASSWORD=apassword
 export SCRAM_BROKER_PASSWORD=bpassword
 export SCRAM_CLIENT_PASSWORD=cpassword" >> /etc/profile
 
-source /etc/profile
+sudo -s source /etc/profile
