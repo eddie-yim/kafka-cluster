@@ -18,3 +18,6 @@ SCRAM_CLIENT_PASSWORD
 ```
 ./bin/kafka-topics.sh --list --bootstrap-server localhost:9092 --command-config <YOUR_BROKER_AUTH_PROPERTIES>.properties
 ```
+```
+./bin/kafka-topics.sh --create --topic yourtest --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092 --command-config <YOUR_BROKER_AUTH_PROPERTIES>.properties
+```
