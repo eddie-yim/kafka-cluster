@@ -36,7 +36,7 @@ fi
 sudo echo -e "broker.id=${BROKER_ID}
 advertised.listeners=SASL_PLAINTEXT://localhost:9092
 allow.everyone.if.no.acl.found=true
-authorizer.class.name=kafka.security.authorizer.SimpleAclAuthorizer
+authorizer.class.name=kafka.security.authorizer.AclAuthorizer
 auto.create.topics.enable=true
 confluent.support.customer.id=anonymous
 confluent.support.metrics.enable=true
