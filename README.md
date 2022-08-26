@@ -16,5 +16,5 @@ SCRAM_CLIENT_PASSWORD
 ```
 ## Kafka test using cli in broker server
 ```
-./kafka-topics.sh --list --bootstrap-server localhost:9092 --command-config <YOUR_BROKER_AUTH_PROPERTIES>.properties
+./bin/kafka-topics.sh --list --bootstrap-server localhost:9092 --command-config <YOUR_BROKER_AUTH_PROPERTIES>.properties
 ```
