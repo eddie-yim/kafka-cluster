@@ -92,7 +92,7 @@ KafkaClient {
 
 # kafka options
 if [ -z "$KAFKA_OPTS" ]; then
-sudo echo "export KAFKA_OPTS=\"-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf
+sudo echo "export KAFKA_OPTS=\"-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf \
 -Dzookeeper.sasl.client=true \
 -Dzookeeper.sasl.clientconfig=Client\"" >> /etc/profile
 sudo -s source /etc/profile
