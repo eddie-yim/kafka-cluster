@@ -14,7 +14,7 @@ akhq:
         bootstrap.servers: \"192.168.64.9:9092\"
         security.protocol: SASL_PLAINTEXT
         sasl.mechanism: SCRAM-SHA-512
-        sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="client" password="${SCRAM_CLIENT_PASSWORD}";
+        sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"client\" password=\"${SCRAM_CLIENT_PASSWORD}\";
 
 " > /usr/local/akhq/application-dev.yml
 
