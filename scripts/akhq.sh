@@ -1,9 +1,8 @@
 #!/bin/bash
 
 if [ ! -e /usr/local/akhq ]; then
-    sudo wget -P /opt https://github.com/tchiotludo/akhq/releases/download/0.21.0/akhq-0.21.0.tar
-    sudo tar xvf /opt/akhq-0.21.0.tar -C /usr/local
-    sudo ln -s /usr/local/akhq-0.21.0 /usr/local/akhq
+    sudo mkdir /usr/local/akhq
+    sudo wget -P /usr/local/akhq https://github.com/tchiotludo/akhq/releases/download/0.21.0/akhq-0.21.0-all.jar
 fi
 
 echo "
@@ -18,4 +17,4 @@ akhq:
 
 " > /usr/local/akhq/application-dev.yml
 
-java -Dmicronaut.config.files=/usr/local/akhq/application-dev.yml -jar /usr/local/akhq/lib/akhq-0.21.0.jar
+java -Dmicronaut.config.files=/usr/local/akhq/application-dev.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar
