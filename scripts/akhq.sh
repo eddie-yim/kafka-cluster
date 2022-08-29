@@ -6,6 +6,9 @@ if [ ! -e /usr/local/akhq ]; then
 fi
 
 echo "
+micronaut:
+  server:
+    port: 8081
 akhq:
   connections:
     dev:
