@@ -9,6 +9,8 @@ echo "
 micronaut:
   server:
     port: 8080
+  security:
+    enabled: true
 akhq:
   connections:
     dev:
@@ -17,7 +19,13 @@ akhq:
         security.protocol: SASL_PLAINTEXT
         sasl.mechanism: SCRAM-SHA-512
         sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"client\" password=\"${SCRAM_CLIENT_PASSWORD}\";
-
+  security:
+    basic-auth:
+      - username: admin
+        password: \"zkvmzkahxlxjgkwk\"
+        passwordHash: BCRYPT
+        groups:
+        - admin
 " > /usr/local/akhq/application.yml
 
 nohup java -Dmicronaut.config.files=/usr/local/akhq/application.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar 1> /dev/null 2>&1 &
