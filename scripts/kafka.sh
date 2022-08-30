@@ -33,6 +33,12 @@ if [ ! -e /data/kafka ]; then
     sudo mkdir -p /data/kafka
 fi
 
+# @production
+# min.insync.replicas=<NUMBER OF BROKERS - 1>
+# num.partitions=<NUMBER OF BROKERS>
+# offsets.topic.replication.factor=<NUMBER OF BROKERS>
+# transaction.state.log.replication.factor=<NUMBER OF BROKERS>
+# transaction.state.log.min.isr=<NUMBER OF BROKERS - 1>
 sudo echo -e "broker.id=${BROKER_ID}
 advertised.listeners=SASL_PLAINTEXT://localhost:9092
 allow.everyone.if.no.acl.found=true
