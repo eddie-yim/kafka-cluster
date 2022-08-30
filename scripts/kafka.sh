@@ -42,6 +42,7 @@ confluent.support.customer.id=anonymous
 confluent.support.metrics.enable=true
 group.initial.rebalance.delay.ms=0
 listeners=SASL_PLAINTEXT://0.0.0.0:9092
+log.cleanup.policy=compact
 log.dirs=/data/kafka
 log.retention.hours=168
 log.retention.check.interval.ms=300000
