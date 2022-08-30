@@ -8,7 +8,7 @@ fi
 echo "
 micronaut:
   server:
-    port: 8081
+    port: 8080
 akhq:
   connections:
     dev:
