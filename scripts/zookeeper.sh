@@ -46,6 +46,7 @@ initLimit=10
 syncLimit=5
 dataDir=/data/zookeeper
 clientPort=2181
+admin.enableServer=false
 autopurge.snapRetainCount=3
 autopurge.purgeInterval=1" > /usr/local/zookeeper/conf/zoo.cfg
 fi
