@@ -22,8 +22,7 @@ akhq:
   security:
     basic-auth:
       - username: admin
-        password: \"$2a$10$zBfNVE9aDx1XBlDda0VpMOIfbT487AUS0NqQ9iCSFCUYP0627V\.MK\"
-        passwordHash: BCRYPT
+        password: \"8D0AB724A7B65D8E1F823473A0349710F4B4015227F51E163F4634D0468DAD33\"
         groups:
         - admin
 " > /usr/local/akhq/application.yml
