@@ -20,4 +20,4 @@ akhq:
 
 " > /usr/local/akhq/application-dev.yml
 
-java -Dmicronaut.config.files=/usr/local/akhq/application-dev.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar
+java -Dmicronaut.config.files=/usr/local/akhq/application-dev.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar &
