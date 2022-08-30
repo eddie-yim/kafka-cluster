@@ -18,6 +18,6 @@ akhq:
         sasl.mechanism: SCRAM-SHA-512
         sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"client\" password=\"${SCRAM_CLIENT_PASSWORD}\";
 
-" > /usr/local/akhq/application-dev.yml
+" > /usr/local/akhq/application.yml
 
-nohup java -Dmicronaut.config.files=/usr/local/akhq/application-dev.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar 1> /dev/null 2>&1 &
+nohup java -Dmicronaut.config.files=/usr/local/akhq/application.yml -jar /usr/local/akhq/akhq-0.21.0-all.jar 1> /dev/null 2>&1 &
