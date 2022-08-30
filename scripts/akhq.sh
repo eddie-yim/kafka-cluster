@@ -22,7 +22,7 @@ akhq:
   security:
     basic-auth:
       - username: admin
-        password: \"$2a$10$zBfNVE9aDx1XBlDda0VpMOIfbT487AUS0NqQ9iCSFCUYP0627V.MK\"
+        password: \"$2a$10$zBfNVE9aDx1XBlDda0VpMOIfbT487AUS0NqQ9iCSFCUYP0627V\.MK\"
         passwordHash: BCRYPT
         groups:
         - admin
