@@ -115,7 +115,7 @@ Type=simple
 SyslogIdentifier=kafka-server
 WorkingDirectory=/usr/local/kafka
 EnvironmentFile=/usr/local/kafka/config/jmx
-Environment="KAFKA_OPTS=-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client"
+Environment=\"KAFKA_OPTS=-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client\"
 Restart=always
 ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
 ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
