@@ -31,7 +31,7 @@ if ! grep -q '^zookeeper:' /etc/passwd; then
 fi
 
 # install zookeeper
-if [ ! -e /usr/local/zookeeper/zkServer.sh ]; then
+if [ ! -e /usr/local/zookeeper/bin/zkServer.sh ]; then
     sudo wget -P /opt https://archive.apache.org/dist/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1-bin.tar.gz
     sudo chmod 600 /opt/apache-zookeeper-3.7.1-bin.tar.gz
     sudo tar -zxvf /opt/apache-zookeeper-3.7.1-bin.tar.gz -C /usr/local
